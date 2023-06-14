@@ -1,21 +1,21 @@
 import { Response } from "express";
 
 export const badRequest = (res: Response, message: string = "Bad Request Found") => {
-    res.send({ message, success: false, }).status(400)
+    res.status(400).send({ message, success: false, })
 }
 
 export const serverError = (res: Response, message: string = "Internal Server Error") => {
-    res.send({ message, success: false }).status(500)
+    res.status(500).send({ message, success: false })
 }
 
 export const unAuthorized = (res: Response, message: string = "Credentials not found") => {
-    res.send({ message, success: false }).status(401)
+    res.status(401).send({ message, success: false })
 }
 
 export const successRequest = (res: Response, status: number, message: string | null, data?: any) => {
-    res.send({ success: true, ...(data && { data }), ...(message && { message }) }).status(status)
+    res.status(status).send({ success: true, ...(data && { data }), ...(message && { message }) })
 }
 
 export const notFound = (res: Response, message: string = "Not Found") => {
-    res.send({ success: false, message }).status(404)
+    res.status(404).send({ success: false, message })
 }

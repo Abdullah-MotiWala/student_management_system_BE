@@ -8,7 +8,7 @@ export const createCourse = async (req: Request, res: Response) => {
         const { type, title, duration } = req.body
 
         const courseData = {
-            type, title, duration,
+            type, title, duration, created_by: req.body.userData.user.id
         }
 
         const course = new Course(courseData)

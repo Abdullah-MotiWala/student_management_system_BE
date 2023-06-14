@@ -13,6 +13,7 @@ const UserSchema = new Schema({
     father_name: { type: String },
     father_cnic: { type: String, unique: true },
     roll_no: { type: String, unique: true },
+    city: { type: String },
     payment_status: { type: Number, enum: PAYMENT_STATUSES, },
     status: { type: Boolean, default: true },
 
