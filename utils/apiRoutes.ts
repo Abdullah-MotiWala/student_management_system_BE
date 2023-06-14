@@ -5,5 +5,6 @@ export const USER = {
 export const COURSE = {
     CREATE: "/",
     DELETE: "/",
-    EDIT: "/"
+    EDIT: "/",
+    GET_ALL: "/"
 }

@@ -75,3 +75,31 @@ export const editCourse = async (req: Request, res: Response) => {
         return serverError(res, err?._message)
     }
 }
+
+export const getAllCourse = async (req: Request, res: Response) => {
+    try {
+        const limit = Number(req.query.limit)
+        const page = Number(req.query.page)
+
+        const [courses] = await Course.aggregate([{
+            $facet: {
+                data: [
+                    { $match: { is_deleted: false } },
+                    { $limit: limit },
+                    { $skip: limit * (page - 1) }
+                ],
+                count: [
+                    { $match: { is_deleted: false } },
+                    { $count: "total" }
+                ]
+            }
+        }])
+        const data = { limit, page, totalCount: courses.count[0].total, courses: courses.data }
+
+        return successRequest(res, 200, null, data)
+
+    } catch (err: { _message: string } | any) {
+        console.log("error : ", err);
+        return serverError(res, err?._message)
+    }
+}
