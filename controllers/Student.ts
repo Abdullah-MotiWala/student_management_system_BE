@@ -3,12 +3,15 @@ import { serverError, successRequest } from "../utils/responses";
 import User from "../models/User";
 import { sendEmail } from "../utils/sendEmail";
 import { getRandomPassword } from "../utils/generatePassword";
+import Course from "../models/Course";
 
 export const addStudents = async (req: Request, res: Response) => {
     try {
         const studentData = req.body.sheetData
         const allQueryPromises: any[] = []
         const allEmailPromises: any[] = []
+        const coursesOfStudents: { [key: string]: number[] } = {}
+
         studentData.forEach((studentRow: any) => {
             if (studentRow.includes("") || studentRow.includes(null) || !studentRow.length)
                 return;
@@ -35,10 +38,20 @@ export const addStudents = async (req: Request, res: Response) => {
         });
 
 
-        const responses = await Promise.all(allQueryPromises)
+        const allNewStudents = await Promise.all(allQueryPromises)
+        allNewStudents.map((student) => {
+            coursesOfStudents[student.course_name] = [...(coursesOfStudents[student.course_name] || []), student.id]
+        })
 
-        successRequest(res, 201, "Students added successfully",)
+        const updatedCourses = await Promise.all(Object.keys(coursesOfStudents).map((course_name) => {
+            return Course.findOneAndUpdate(
+                { title: course_name },
+                { $push: { students: { $each: coursesOfStudents[course_name] } } },
+                { new: true }
+            )
+        }))
 
+        successRequest(res, 201, "Students added successfully", updatedCourses)
 
     } catch (err: { _message: string } | any) {
         console.log("error : ", err);

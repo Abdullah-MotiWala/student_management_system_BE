@@ -9,6 +9,7 @@ const UserSchema = new Schema({
     password: { type: String, required: true },
 
     branch_name: { type: String },
+    course_name: { type: String },
     qualification: { type: String },
     father_name: { type: String },
     father_cnic: { type: String, unique: true },
