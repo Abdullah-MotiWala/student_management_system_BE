@@ -58,9 +58,6 @@ export const editCourse = async (req: Request, res: Response) => {
         if (course.is_deleted)
             return badRequest(res, "Course is deleted")
 
-        if (title !== course.title)
-            course.title = title
-
         course.type = type
         course.duration = duration
         course.updated_at = new Date()

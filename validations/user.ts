@@ -1,7 +1,11 @@
-import { object, string } from "yup";
+import { boolean, object, string } from "yup";
 import { EMAIL_REGEX } from "../utils/constants";
 
 export const signInValidations = object().shape({
-    email: string().email("Invalid email address").matches(EMAIL_REGEX,"Invalid email address").required("Email is required"),
+    email: string().email("Invalid email address").matches(EMAIL_REGEX, "Invalid email address").required("Email is required"),
     password: string().required("Password is required")
+})
+
+export const updateStatusValidations = object().shape({
+    status: boolean().required("Status is required")
 })

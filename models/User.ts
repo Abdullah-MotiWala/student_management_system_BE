@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     father_cnic: { type: String, unique: true },
     roll_no: { type: String, unique: true },
     city: { type: String },
-    payment_status: { type: Number, enum: PAYMENT_STATUSES, },
+    payment_status: { type: Number, enum: PAYMENT_STATUSES, default: 0 },
     status: { type: Boolean, default: true },
 
     is_deleted: { type: Boolean, default: false },

@@ -3,7 +3,12 @@ export const USER = {
 }
 
 export const STUDENT = {
-    ADD_STUDENTS: "/"
+    ADD_STUDENTS: "/",
+    EDIT: "/",
+    DELETE: "/",
+    GET_ALL: "/",
+    UPDATE_STATUS: "/status/",
+    UPDATE_PAYMENT_STATUS: "/payment-status/"
 }
 
 export const COURSE = {
