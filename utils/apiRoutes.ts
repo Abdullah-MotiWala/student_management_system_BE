@@ -8,12 +8,14 @@ export const STUDENT = {
     DELETE: "/",
     GET_ALL: "/",
     UPDATE_STATUS: "/status/",
-    UPDATE_PAYMENT_STATUS: "/payment-status/"
+    UPDATE_PAYMENT_STATUS: "/payment-status/",
+    GET: "/"
 }
 
 export const COURSE = {
     CREATE: "/",
     DELETE: "/",
     EDIT: "/",
-    GET_ALL: "/"
+    GET_ALL: "/",
+    GET: "/"
 }

@@ -5,7 +5,7 @@ import User from "../models/User";
 export const validateAdminUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { userData: { user } } = req.body
-        const isAdmin = user.user_type === 0
+        const isAdmin = user.user_type === 0 || user.user_type === 3
 
 
         if (!isAdmin)

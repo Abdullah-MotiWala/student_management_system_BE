@@ -73,6 +73,21 @@ export const editCourse = async (req: Request, res: Response) => {
     }
 }
 
+export const getCourse = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.query
+        const course = await Course.findOne({ _id: id, is_deleted: false })
+        if (!course)
+            return notFound(res, "Course not found")
+
+        return successRequest(res, 200, "", course)
+
+    } catch (err: { _message: string } | any) {
+        console.log("error : ", err);
+        return serverError(res, err?._message)
+    }
+}
+
 export const getAllCourse = async (req: Request, res: Response) => {
     try {
         const limit = Number(req.query.limit)

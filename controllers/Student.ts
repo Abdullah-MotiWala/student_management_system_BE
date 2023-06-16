@@ -235,3 +235,18 @@ export const getAllStudents = async (req: Request, res: Response) => {
         return serverError(res, err?._message)
     }
 }
+
+export const getStudent = async (req: Request, res: Response) => {
+    try {
+        const { id } = req.query
+        const student = await User.findOne({ _id: id, is_deleted: false, user_type: 2 }).select("-password -is_deleted")
+        if (!student)
+            return notFound(res, "Student not found")
+
+        return successRequest(res, 200, "", student)
+
+    } catch (err: { _message: string } | any) {
+        console.log("error : ", err);
+        return serverError(res, err?._message)
+    }
+}

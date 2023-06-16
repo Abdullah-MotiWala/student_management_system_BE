@@ -28,7 +28,6 @@ const UserSchema = new Schema({
     updated_at: { type: Date },
 
     user_type: { type: Number, enum: USER_TYPES, required: true },
-    is_super_admin: { type: Boolean, default: false }
 })
 
 UserSchema.index({ payment_status: 1 });
